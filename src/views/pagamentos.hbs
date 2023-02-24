@@ -1,0 +1,53 @@
+<div class="container">
+    <h3>Pagamentos</h3>  
+    <br>
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-primary">
+                <thead>
+                    <tr>
+                        <th scope="col">Parcela</th>
+                        <th scope="col">Data Pagamento</th>
+                        <th scope="col">Pagador</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Cancelar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#if arrPagamentos}}                       
+                    {{#each arrPagamentos}}
+                    <tr class="">
+                        <td hidden>{{this.uid}}</td>
+                        <td scope="row">{{this.id}}</td>
+                        <td>{{this.data}}</td>
+                        {{#with this.pagador}}
+                        <td>{{this.nome}}</td>
+                        {{/with}}
+                        <td>{{this.valorPago}}</td>
+                        <td> 
+                        {{#if this.status}}
+                            <button type="button" disabled class="btn btn-success">Pago</button> 
+                        {{else}}
+                             <button type="button" class="btn btn-primary">Pagar</button>                              
+                        {{/if}}                                                        
+                        </td>
+                        <td>
+                            <form action="/pagamento/delete" method="POST">
+                                <input type="hidden" name="uid" value="{{this.uid}}">
+                                <input type="hidden" name="valorPago" value="{{this.valorPago}}">
+                                <input type="hidden" name="idPagador" value="{{#with this.pagador}}{{this._id}}{{/with}}">
+                                <button type="submit" class="btn btn-danger">Cancelar</button>  
+                            </form>
+                        </td>
+                    </tr>
+                    {{/each}}
+                    {{else}}
+                        <h3>Ainda não foi realizado nenhum pagamento.</h3>
+                    {{/if}}                       
+                </tbody>
+            </table>
+        </div>
+        
+    </div>     
+</div>

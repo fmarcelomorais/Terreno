@@ -1,0 +1,28 @@
+<div class="container">   
+    <h3>Pagadores</h3>  
+    <br>                        
+    <div class="table-responsive">
+        <table class="table table-primary">
+            <thead>
+                <tr>
+                    <th scope="col">NOME</th>
+                    <th scope="col">VALOR</th>
+                    <th scope="col">STATUS</th>
+                </tr>
+            </thead>            
+            <tbody>                 
+            {{#each pagador}}
+                <tr class=""> 
+                    <td>{{this.nome}}</td>                                                      
+                    <td>R$ {{this.valor}}</td> 
+                    {{#if this.valor}}
+                        <td>Pendente</td> 
+                    {{else}}   
+                        <td>Quitado</td> 
+                    {{/if}}
+                </tr>
+            {{/each }}
+            </tbody>
+        </table>
+    </div>    
+</div>
