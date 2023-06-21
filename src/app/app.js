@@ -9,7 +9,14 @@ const {init: handlebars} = require('../helpers/handlebars')
 handlebars(app);
 
 app.use(express.static(path.join(__dirname, 'assets'))); // arquivos staticos
-app.use(cors())
+app.use(cors({
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'access-control-allow-origin'],
+        credentials: true,
+        optionsSuccessStatus: 200,
+        maxAge: 86400
+    }))
 
 // Rotas da api
 const rotaInicial = require('../routes/rotaInicial')
