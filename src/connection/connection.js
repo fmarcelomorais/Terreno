@@ -8,7 +8,7 @@ const conector = `mongodb+srv://${user}:${password}@${banco}/?retryWrites=true&w
 
 async function conect(){
     await mongoose.connect(conector) 
-    mongoose.set('strictQuery', true);   
+    mongoose.set('strictQuery', false);   
     console.log('Conectado ao banco de dados')
 
 }
