@@ -7,7 +7,7 @@ const banco = process.env.DB_BANCO
 const conector = `mongodb+srv://${user}:${password}@${banco}/?retryWrites=true&w=majority`
 
 async function conect(){
-    mongoose.set('strictQuery', false);   
+    mongoose.set('strictQuery', true);   
     await mongoose.connect(conector) 
     console.log('Conectado ao banco de dados')
 
