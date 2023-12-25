@@ -1,6 +1,6 @@
-const PARTIALS_DIR = 'src/views/partials/';
-const LAYOUTS_DIR = 'src/views/layouts/';
-const VIEWS_DIR = 'src/views/';
+const PARTIALS_DIR = '/src/views/partials/';
+const LAYOUTS_DIR = '/src/views/layouts/';
+const VIEWS_DIR = '/src/views/';
 const MAIN_DIR = 'main.hbs';
 
 module.exports = {
