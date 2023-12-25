@@ -3,10 +3,10 @@ const Financiamento = require('../model/financiamento')
 class FinanciamentoController {
 
     static async create(req, res){
-        const {valorTotal, status} = req.body
+        const {objeto, valorTotal, saldo, status} = req.body
 
         const financiamento = new Financiamento({
-            valorTotal, status
+            objeto, valorTotal, saldo, status
         })
 
         try {

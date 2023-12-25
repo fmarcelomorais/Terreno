@@ -37,8 +37,13 @@
                                 <input type="hidden" name="uid" value="{{this.uid}}">
                                 <input type="hidden" name="valorPago" value="{{this.valorPago}}">
                                 <input type="hidden" name="idPagador" value="{{#with this.pagador}}{{this._id}}{{/with}}">
-                                <button type="submit" class="btn btn-danger">Cancelar</button>  
-                            </form>
+                                <button type="submit" class="btn btn-danger">Cancelar</button>    
+                        {{#if statusPag}}
+                        <script>                           
+                            swal("Cancelado", "Pagamento Cancelado.", "success");
+                        </script>
+                        {{/if}}                      
+                            </form>                            
                         </td>
                     </tr>
                     {{/each}}

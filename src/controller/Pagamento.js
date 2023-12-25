@@ -2,11 +2,12 @@ const Pagamento = require('../model/pagamento');
 const Financiamento = require('../model/financiamento');
 const Financiador = require('../model/financiador');
 const { MAIN_DIR } = require('../helpers/constants');
+require('dotenv').config()
 
 class PagamentoController {
     
     static async create(req, res){
-        const {dataPagamento, pagador,  valorPago, status} = req.body;
+        const {dataPagamento, pagador,  valorPago} = req.body;
 
         const pagamento = new Pagamento({
             data: dataPagamento,
@@ -15,7 +16,7 @@ class PagamentoController {
             status: true
         }); 
       
-        const financiamento = await Financiamento.findById('63d6d96657a24e920fcddf78'); //Financiamento
+        const financiamento = await Financiamento.findById(process.env.FINANCIAMENTO); //Financiamento
         const financiador = await Financiador.findById(pagador);
         
         //const novoValor = financiamento.valorTotal - Number(valorPago);
@@ -60,19 +61,21 @@ class PagamentoController {
     }
 
     static async cancelar(req, res){
+        debugger
         const {uid, valorPago, idPagador} = req.body; 
-        const financiamento = await Financiamento.findById('63d6d96657a24e920fcddf78'); 
+        const financiamento = await Financiamento.findById(process.env.FINANCIAMENTO); 
         const financiador = await Financiador.findById(idPagador)
         const novoValorFinanciador = financiador.valor + Number(valorPago)
         const novoSaldo = financiamento.saldo - Number(valorPago)
 
         financiamento.saldo = novoSaldo
         financiador.valor = novoValorFinanciador
+       
         try {           
             await financiamento.save();
             await financiador.save();
-            await Pagamento.findByIdAndDelete(uid)            
-            res.redirect('/pagamento')                  
+            const statusPag = await Pagamento.findByIdAndDelete(uid)          
+            res.render('pagamentos', { layout: MAIN_DIR, title: "Pagamentos", statusPag } )                  
         } catch (error) {
             res.status(400).json({message: error.message}) 
         }   
