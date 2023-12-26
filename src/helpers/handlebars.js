@@ -13,6 +13,6 @@ exports.init = function(app){
         }
         
     }));
-    app.set('views', VIEWS_DIR);
+    app.set('views', require('path').resolve(__dirname, VIEWS_DIR));
     app.set('view engine', 'hbs');
 }
