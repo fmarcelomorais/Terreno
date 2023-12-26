@@ -75,7 +75,7 @@ class PagamentoController {
             await financiamento.save();
             await financiador.save();
             const statusPag = await Pagamento.findByIdAndDelete(uid)          
-            res.render('pagamentos', { layout: MAIN_DIR, title: "Pagamentos", statusPag } )                  
+            res.redirect('/pagamento')                  
         } catch (error) {
             res.status(400).json({message: error.message}) 
         }   
