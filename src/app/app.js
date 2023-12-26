@@ -8,7 +8,7 @@ const app = express()
 const {init: handlebars} = require('../helpers/handlebars')
 handlebars(app);
 
-app.use(express.static(path.join(__dirname, 'assets'))); // arquivos staticos
+app.use(express.static(path.resolve(__dirname, 'assets'))); // arquivos staticos
 app.use(cors({
         origin: '*',
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
